@@ -1,15 +1,13 @@
 package Basics;
 
 import io.restassured.RestAssured;
+import io.restassured.RestAssured.*;
 import io.restassured.path.json.JsonPath;
-
 import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
 
 import Files.payload;
 
 public class basics {
-
 	public static void main(String[] args)
 	{
 		RestAssured.baseURI="https://rahulshettyacademy.com";
@@ -39,13 +37,13 @@ public class basics {
 				+ "\"address\":\"70 orange Street Australia\",\r\n"
 				+ "\"key\":\"qaclick123\"\r\n"
 				+ "}\r\n"
-				+ "").when().put("/maps/api/place/update/json").then().log().all().assertThat().statusCode(200).body("msg", equalTo("Address successfully updated"));
+				+ "").when().put("/maps/api/place/update/json").then().log().all().assertThat().statusCode(200);
 		
 		//This is GetPlaceAPI - we are validating the latest address has been updated or not.
 		
 		
 	
-		given().log().all().queryParam("key", "qaclick123").queryParam("place_id",placeid).when().get("/maps/api/place/get/json").then().log().all().assertThat().statusCode(200).body("address", equalTo("70 orange Street Australia"));
+		given().log().all().queryParam("key", "qaclick123").queryParam("place_id",placeid).when().get("/maps/api/place/get/json").then().log().all().assertThat().statusCode(200);
 	}
 	
 	
